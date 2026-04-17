@@ -7,7 +7,7 @@ sns.set(style='dark')
 
 @st.cache_data
 def load_data():
-    ddf = pd.read_csv("main_data.csv")
+    ddf = pd.read_csv("main_data.zip")
     
     if 'datetime' not in df.columns:
         df['datetime'] = pd.to_datetime(df[['year', 'month', 'day', 'hour']])
