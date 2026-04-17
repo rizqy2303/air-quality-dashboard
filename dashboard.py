@@ -5,17 +5,24 @@ import streamlit as st
 
 sns.set(style='dark')
 
+
 @st.cache_data
 def load_data():
 
     df = pd.read_csv("main_data.zip", compression="zip")
 
     if 'datetime' not in df.columns:
-        df['datetime'] = pd.to_datetime(df[['year','month','day','hour']])
+        df['datetime'] = pd.to_datetime(
+            df[['year','month','day','hour']],
+            errors='coerce'
+        )
     else:
-        df['datetime'] = pd.to_datetime(df['datetime'])
+        df['datetime'] = pd.to_datetime(df['datetime'], errors='coerce')
+
+    df = df.dropna(subset=['datetime'])
 
     if 'AQI_Category' not in df.columns:
+
         def category_pm25(value):
             if value <= 35:
                 return "Baik"
@@ -38,7 +45,7 @@ st.sidebar.header("Filter Data")
 station_list = main_df['station'].unique()
 
 selected_station = st.sidebar.selectbox(
-    "Pilih Stasiun Pemantau:",
+    "Pilih Stasiun Pemantau",
     station_list
 )
 
@@ -46,21 +53,33 @@ filtered_df = main_df[main_df['station'] == selected_station]
 
 
 st.title("Dashboard Kualitas Udara Beijing")
-st.write(f"Menampilkan hasil analisis kualitas udara untuk stasiun: **{selected_station}**")
+
+st.write(
+    f"Menampilkan hasil analisis kualitas udara untuk stasiun: **{selected_station}**"
+)
 
 
 avg_pm25 = filtered_df['PM2.5'].mean()
-st.metric("Rata-rata Konsentrasi PM2.5", f"{avg_pm25:.2f} µg/m³")
+
+st.metric(
+    "Rata-rata Konsentrasi PM2.5",
+    f"{avg_pm25:.2f} µg/m³"
+)
 
 st.markdown("---")
 
 
 st.subheader("Tren Polusi PM2.5 Bulanan")
 
-monthly_trend = filtered_df.resample(
-    'M',
-    on='datetime'
-)['PM2.5'].mean().reset_index()
+filtered_df = filtered_df.sort_values("datetime")
+
+monthly_trend = (
+    filtered_df
+    .set_index("datetime")
+    .resample("M")["PM2.5"]
+    .mean()
+    .reset_index()
+)
 
 fig, ax = plt.subplots(figsize=(10,5))
 
@@ -78,6 +97,7 @@ ax.set_title(
 
 ax.set_xlabel("Waktu")
 ax.set_ylabel("Rata-rata PM2.5")
+
 ax.grid(True, linestyle='--', alpha=0.7)
 
 st.pyplot(fig)
@@ -86,7 +106,10 @@ st.markdown("---")
 
 
 st.subheader("Distribusi Kategori Kualitas Udara")
-st.write("Berdasarkan pengelompokan nilai PM2.5")
+
+st.write(
+    "Berdasarkan pengelompokan nilai PM2.5"
+)
 
 fig2, ax2 = plt.subplots(figsize=(8,5))
 
@@ -104,10 +127,12 @@ sns.countplot(
 )
 
 ax2.set_title("Frekuensi Kategori Kualitas Udara")
+
 ax2.set_xlabel("Kategori")
 ax2.set_ylabel("Jumlah Catatan (Jam)")
 
 st.pyplot(fig2)
 
-
-st.caption("Proyek Analisis Data Dicoding - Dibuat oleh Rizqy")
+st.caption(
+    "Proyek Analisis Data Dicoding - Dibuat oleh Rizqy"
+)
