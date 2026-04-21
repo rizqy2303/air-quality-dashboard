@@ -10,7 +10,7 @@ sns.set(style="darkgrid")
 @st.cache_data
 def load_data():
     # Pastikan file ini ada di GitHub kamu dengan nama yang sama
-    df = pd.read_csv("main_data.csv") 
+    df = pd.read_csv("main_data.zip") 
 
     # Konversi datetime
     df["datetime"] = pd.to_datetime(
