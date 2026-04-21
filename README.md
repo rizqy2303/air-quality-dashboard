@@ -1,30 +1,32 @@
 # Air Quality Analysis Dashboard: Beijing Dataset
 
-Proyek ini merupakan submission untuk kelas **Belajar Analisis Data dengan Python** di platform Dicoding.
-Tujuan proyek ini adalah melakukan analisis terhadap kualitas udara di Beijing dengan fokus pada **polusi PM2.5**, serta menyajikan hasil analisis dalam bentuk **dashboard interaktif menggunakan Streamlit**.
+Proyek ini merupakan submission untuk kelas **Belajar Analisis Data dengan Python** di Dicoding.
+Analisis dilakukan untuk memahami pola **polusi PM2.5 di Beijing** berdasarkan data dari beberapa stasiun pemantauan kualitas udara.
 
-Dashboard menampilkan:
+Hasil analisis ditampilkan dalam bentuk **dashboard interaktif menggunakan Streamlit**.
 
-* Perbandingan rata-rata polusi antar stasiun pemantau
-* Tren polusi PM2.5 dari waktu ke waktu
-* Hubungan antara suhu udara dan konsentrasi PM2.5
+---
+
+# Dashboard Online
+
+Dashboard dapat diakses secara langsung melalui link berikut:
+
+https://air-quality-dashboardgit-3kbklstspjdyvm88p8gs5z.streamlit.app/
 
 ---
 
 # Struktur Direktori
 
-Pastikan struktur folder proyek sebagai berikut agar dashboard dapat berjalan dengan baik.
-
-```
+```text
 .
 ├── dashboard/
 │   ├── dashboard.py       # File utama aplikasi Streamlit
 │   └── main_data.csv      # Dataset yang telah dibersihkan
 ├── data/
-│   └── (Dataset mentah dari stasiun pemantau)
-├── notebook.ipynb         # Notebook analisis data
+│   └── (Dataset mentah stasiun pemantau)
+├── notebook.ipynb         # Proses analisis data
 ├── README.md              # Dokumentasi proyek
-├── requirements.txt       # Daftar library yang dibutuhkan
+├── requirements.txt       # Library yang digunakan
 └── url.txt                # Link dashboard online
 ```
 
@@ -32,74 +34,63 @@ Pastikan struktur folder proyek sebagai berikut agar dashboard dapat berjalan de
 
 # Setup Environment
 
-Sebelum menjalankan dashboard, disarankan untuk membuat **environment baru** agar tidak terjadi konflik versi library.
+Sebelum menjalankan dashboard secara lokal, buat environment baru agar tidak terjadi konflik library.
 
 ## Setup Environment - Anaconda
 
 Buat environment baru:
 
-```
+```bash
 conda create --name main-ds python=3.9
 ```
 
 Aktifkan environment:
 
-```
+```bash
 conda activate main-ds
-```
-
-Install semua library yang dibutuhkan:
-
-```
-pip install -r requirements.txt
-```
-
----
-
-## Setup Environment - Shell / Terminal (Pipenv)
-
-Buat folder proyek dan masuk ke direktori tersebut:
-
-```
-mkdir proyek_analisis_data
-cd proyek_analisis_data
-```
-
-Install pipenv:
-
-```
-pip install pipenv
-```
-
-Buat virtual environment:
-
-```
-pipenv install
-```
-
-Aktifkan environment:
-
-```
-pipenv shell
 ```
 
 Install dependencies:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-# Menjalankan Dashboard Streamlit
+## Setup Environment - Shell / Terminal
 
-Setelah environment aktif dan library terinstal, jalankan dashboard dengan perintah berikut:
+Buat folder proyek dan masuk ke direktori:
 
+```bash
+mkdir proyek_analisis_data
+cd proyek_analisis_data
 ```
+
+Buat virtual environment:
+
+```bash
+pipenv install
+pipenv shell
+```
+
+Install library:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# Menjalankan Dashboard
+
+Untuk menjalankan dashboard secara lokal gunakan perintah berikut:
+
+```bash
 streamlit run dashboard/dashboard.py
 ```
 
-Dashboard akan otomatis terbuka di browser pada alamat:
+Dashboard akan berjalan pada alamat:
 
 ```
 http://localhost:8501
@@ -109,9 +100,9 @@ http://localhost:8501
 
 # Dataset
 
-Dataset yang digunakan berasal dari **Beijing Multi-Site Air Quality Dataset** yang berisi data kualitas udara dari beberapa stasiun pemantauan di Beijing.
+Dataset yang digunakan adalah **Beijing Multi-Site Air Quality Dataset** yang berisi data kualitas udara dari beberapa stasiun pemantauan di Beijing.
 
-Variabel utama yang dianalisis antara lain:
+Variabel utama yang dianalisis:
 
 * **PM2.5** → Konsentrasi partikel polusi udara
 * **TEMP** → Suhu udara
@@ -122,4 +113,4 @@ Variabel utama yang dianalisis antara lain:
 
 # Author
 
-Proyek ini dibuat sebagai bagian dari submission kelas **Belajar Analisis Data dengan Python – Dicoding**.
+Submission untuk kelas **Belajar Analisis Data dengan Python – Dicoding**.
