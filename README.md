@@ -19,21 +19,22 @@ https://air-quality-dashboardgit-3kbklstspjdyvm88p8gs5z.streamlit.app/
 
 ---
 
-# Struktur Direktori
+## Struktur Direktori
 
 Berikut struktur direktori dari proyek ini:
+
+```
+.
 ├── dashboard/
 │   ├── dashboard.py
 │   └── main_data.csv
 ├── data/
-│  └── (dataset mentah stasiun pemantau)
+│   └── dataset mentah stasiun pemantau
 ├── notebook.ipynb
 ├── README.md
 ├── requirements.txt
 └── url.txt
-
-
----
+```
 
 # Setup Environment
 
